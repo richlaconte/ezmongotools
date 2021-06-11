@@ -1,7 +1,7 @@
 # ezmongotools
 
 ## Available functions:
-### insertDocs**(db, collectionName, arrayOfObjs, callback, logs)
+### **insertDocs**(db, collectionName, arrayOfObjs, callback, logs)
   - db - db to edit
   - collectionName - name of collection to insert into
   - arrayOfObjs - single or multiple object/s wrapped in an array to add to collection
@@ -29,14 +29,14 @@
 })
 ```
 --- 
-### findAllDocs**(db, collectionName, callback, logs)
+### **findAllDocs**(db, collectionName, callback, logs)
   - same as above, but without arrayOfObjs
-### findDocs**(db, collectionName, query, callback, logs)
+### **findDocs**(db, collectionName, query, callback, logs)
   - see insertDocs
-### removeDoc**(db, collectionName, query, callback, logs)
+### **removeDoc**(db, collectionName, query, callback, logs)
   - see insertDocs
   - query - mongo query of which doc to remove
-### updateDoc**(db, collectionName, query, value, callback)
+### **updateDoc**(db, collectionName, query, value, callback)
   - see removeDoc
 
 ## Example use:
