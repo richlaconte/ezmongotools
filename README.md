@@ -28,7 +28,7 @@
     })
 })
 ```
-======
+====== 
 ### findAllDocs**(db, collectionName, callback, logs)
   - same as above, but without arrayOfObjs
 ### findDocs**(db, collectionName, query, callback, logs)
