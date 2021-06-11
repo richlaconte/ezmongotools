@@ -1,23 +1,45 @@
 # ezmongotools
 
-##Available functions:
-- **insertDocs**(db, collectionName, arrayOfObjs, callback, logs)
+## Available functions:
+### insertDocs**(db, collectionName, arrayOfObjs, callback, logs)
   - db - db to edit
   - collectionName - name of collection to insert into
   - arrayOfObjs - single or multiple object/s wrapped in an array to add to collection
   - callback - callback to handle docs returned
   - logs - bool whether or not to console.log() data
-- **findAllDocs**(db, collectionName, callback, logs)
+```
+ insertDocs(db, collection, [
+    { 
+        "organizationId": uuidv4(), 
+        "name": req.body.name, 
+        "owner": req.body.owner,
+        "events": [] 
+    }
+], () => {
+    findAllDocs(db, collection, (docs) => {
+        console.log(docs)
+        if (docs.length) {
+            res.json({
+                organizations: docs
+            })
+        } else {
+            res.send('No organizations found.')
+        }
+    })
+})
+```
+======
+### findAllDocs**(db, collectionName, callback, logs)
   - same as above, but without arrayOfObjs
-- **findDocs**(db, collectionName, query, callback, logs)
+### findDocs**(db, collectionName, query, callback, logs)
   - see insertDocs
-- **removeDoc**(db, collectionName, query, callback, logs)
+### removeDoc**(db, collectionName, query, callback, logs)
   - see insertDocs
   - query - mongo query of which doc to remove
-- **updateDoc**(db, collectionName, query, value, callback)
+### updateDoc**(db, collectionName, query, value, callback)
   - see removeDoc
 
-##Example use:
+## Example use:
 
 ```
 const express = require('express')
