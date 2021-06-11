@@ -30,17 +30,83 @@
 ```
 --- 
 ### **findAllDocs**(db, collectionName, callback, logs)
-  - same as above, but without arrayOfObjs
+  - db to edit
+  - collectionName - name of collection to insert into
+  - callback - callback to handle docs returned
+  - logs - bool whether or not to console.log() data
+```
+findAllDocs(db, collection, (docs) => {
+    console.log(docs)
+    if (docs.length) {
+        res.json({
+            items: docs
+        })
+    } else {
+        res.send('No items found.')
+    }
+})
+```
+--- 
 ### **findDocs**(db, collectionName, query, callback, logs)
-  - see insertDocs
+  - db - db to edit
+  - collectionName - name of collection to insert into
+  - query - mongo query of which doc to find
+  - callback - callback to handle docs returned
+  - logs - bool whether or not to console.log() data
+```
+findDocs(db, collection, { "organizationId": req.body.organizationId }, (docs) => {
+    if (!docs[0]) {
+        res.send('Organization not found.')
+    } else {
+        res.json({
+          organization: docs[0]
+        })
+    }
+})
+```
+--- 
 ### **removeDoc**(db, collectionName, query, callback, logs)
-  - see insertDocs
+  - db to edit
+  - collectionName - name of collection to insert into
   - query - mongo query of which doc to remove
+  - callback - callback to handle docs returned
+  - logs - bool whether or not to console.log() data
+```
+removeDoc(db, collection, { "organizationId": req.body.organizationId }, () => {
+    findAllDocs(db, collection, (docs) => {
+        if (docs.length) {
+            res.json({
+                organizations: docs
+            })
+        } else {
+            res.send('No organizations found.')
+        }
+    })
+})
+```
+--- 
 ### **updateDoc**(db, collectionName, query, value, callback)
-  - see removeDoc
-
+  - db to edit
+  - collectionName - name of collection to insert into
+  - query - mongo query of which doc to remove
+  - value - mongo query/value to change
+  - callback - callback to handle docs returned
+  - logs - bool whether or not to console.log() data
+```
+updateDoc(db, collection, { "organizationId": req.body.organizationId }, { "events": events }, () => {
+    findDocs(db, collection, { "organizationId": req.body.organizationId }, (docs) => {
+        if (docs.length) {
+            res.json({
+                docs
+            })
+        } else {
+            res.send('Organization not found.')
+        }
+    })
+})
+```
+--- 
 ## Example use:
-
 ```
 const express = require('express')
 const router = express.Router()
